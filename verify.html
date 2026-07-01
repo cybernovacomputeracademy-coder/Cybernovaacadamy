@@ -1,0 +1,400 @@
+<!--
+  ====================================================================
+  CYBER NOVA COMPUTER ACADEMY - CERTIFICATE VERIFICATION PAGE
+  © 2025 Cyber Nova Computer Academy. All Rights Reserved.
+  
+  This page is for certificate verification purposes only.
+  For full license terms, see LICENSE file.
+  ====================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Verification - Cyber Nova Computer Academy</title>
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --accent: #6c63ff;
+    --text: #e8e8f0;
+    --muted: #888899;
+    --white: #ffffff;
+    --card-bg: #13131e;
+    --success: #43e97b;
+    --error: #ff6584;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 5%;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* ── HEADER ── */
+  .verify-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 3rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .verify-logo {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Syne', sans-serif; font-size: 1.3rem;
+    font-weight: 800; color: var(--white);
+  }
+
+  .verify-logo img { height: 32px; width: 32px; border-radius: 6px; object-fit: cover; }
+  .verify-logo span { color: var(--accent); }
+
+  .back-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── MAIN CONTAINER ── */
+  .verify-container {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; align-items: start;
+  }
+
+  .verify-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 2rem;
+  }
+
+  .verify-box h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1rem;
+  }
+
+  .verify-box p {
+    color: var(--muted); font-size: 0.9rem;
+    line-height: 1.6; margin-bottom: 1.5rem;
+  }
+
+  /* ── FORM ── */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block; font-size: 0.82rem;
+    color: var(--muted); margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%; padding: 0.75rem 1rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--accent);
+  }
+
+  .btn-verify {
+    width: 100%; padding: 0.9rem;
+    background: var(--accent); color: white; border: none;
+    border-radius: 12px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0 0 24px rgba(108,99,255,0.35);
+  }
+  .btn-verify:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-verify:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── CERTIFICATE ── */
+  .cert-display {
+    display: none;
+  }
+
+  .cert-display.show {
+    display: block;
+  }
+
+  .certificate {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px; padding: 3rem;
+    text-align: center; box-shadow: 0 12px 50px rgba(0,0,0,0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .certificate .title {
+    color: white; font-size: 0.85rem;
+    letter-spacing: 0.15em; margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .certificate .subtitle {
+    color: rgba(255,255,255,0.9); font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .certificate .name {
+    color: white; font-family: 'Syne', sans-serif;
+    font-size: 2.2rem; font-weight: 800;
+    margin-bottom: 1.5rem; letter-spacing: -0.01em;
+  }
+
+  .certificate .course-label {
+    color: rgba(255,255,255,0.9); font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .certificate .course {
+    color: white; font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .certificate .divider {
+    border-top: 2px solid rgba(255,255,255,0.3);
+    padding-top: 1.5rem; margin-bottom: 1.5rem;
+  }
+
+  .certificate .details {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-bottom: 1.5rem;
+  }
+
+  .cert-detail {
+    text-align: center;
+  }
+
+  .cert-detail-label {
+    color: rgba(255,255,255,0.7); font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cert-detail-value {
+    color: white; font-size: 0.95rem; font-weight: 600;
+  }
+
+  .certificate .footer {
+    color: rgba(255,255,255,0.8); font-size: 0.85rem;
+  }
+
+  .cert-actions {
+    display: flex; gap: 1rem; margin-top: 1.5rem;
+  }
+
+  .btn-secondary {
+    flex: 1; padding: 0.7rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── STATUS MESSAGES ── */
+  .status-box {
+    padding: 1.2rem; border-radius: 12px; margin-bottom: 1rem;
+    font-size: 0.9rem; display: none;
+  }
+
+  .status-box.show { display: block; }
+
+  .status-success {
+    background: rgba(67,233,123,0.15); border: 1px solid rgba(67,233,123,0.3);
+    color: var(--success);
+  }
+
+  .status-error {
+    background: rgba(255,101,132,0.15); border: 1px solid rgba(255,101,132,0.3);
+    color: var(--error);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .verify-container { grid-template-columns: 1fr; }
+    .verify-header { flex-direction: column; gap: 1rem; text-align: center; }
+    .certificate { padding: 2rem; }
+    .certificate .name { font-size: 1.8rem; }
+    .certificate .details { grid-template-columns: 1fr; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="verify-header">
+  <div class="verify-logo">
+    <img src="logo.jpeg" alt="Logo">
+    Cyber <span>Nova</span> Computer Academy
+  </div>
+  <a href="index.html" class="back-btn">← Back to Website</a>
+</div>
+
+<div class="verify-container">
+  <!-- Verification Form -->
+  <div class="verify-box">
+    <h2>🔍 Verify Certificate</h2>
+    <p>Enter your certificate ID or scan the QR code to verify your course completion certificate.</p>
+
+    <div class="status-box" id="statusBox"></div>
+
+    <div class="form-group">
+      <label>Certificate ID *</label>
+      <input 
+        type="text" 
+        id="certId" 
+        placeholder="e.g., CNCA-2025-001"
+        autocomplete="off"
+      />
+    </div>
+
+    <button class="btn-verify" onclick="verifyCertificate()">Verify Certificate</button>
+
+    <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--muted);text-align:center;">
+      Your certificate ID is provided via email after course completion. You can also scan the QR code on your physical certificate.
+    </p>
+  </div>
+
+  <!-- Certificate Display -->
+  <div class="cert-display" id="certDisplay">
+    <div class="certificate" id="certificateContent">
+      <div class="title">Certificate of Completion</div>
+      <div class="subtitle">This is to certify that</div>
+      <div class="name" id="displayName">—</div>
+      <div class="course-label">has successfully completed the</div>
+      <div class="course" id="displayCourse">Course Name</div>
+      
+      <div class="divider"></div>
+
+      <div class="details">
+        <div class="cert-detail">
+          <div class="cert-detail-label">Date of Issue</div>
+          <div class="cert-detail-value" id="displayDate">—</div>
+        </div>
+        <div class="cert-detail">
+          <div class="cert-detail-label">Certificate ID</div>
+          <div class="cert-detail-value" id="displayId">—</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>Cyber Nova Computer Academy</div>
+        <div style="margin-top:0.3rem;font-size:0.8rem;opacity:0.8;">Karachi, Pakistan</div>
+      </div>
+    </div>
+
+    <div class="cert-actions">
+      <button class="btn-secondary" onclick="printCertificate()">🖨️ Print</button>
+      <button class="btn-secondary" onclick="resetVerification()">🔄 Verify Another</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+  const certificates = {
+    'CNCA-2025-001': { name: 'Ali Hassan', course: 'Python Programming', date: '15 January 2025' },
+    'CNCA-2025-002': { name: 'Fatima Khan', course: 'Web Development', date: '20 January 2025' },
+    'CNCA-2025-003': { name: 'Muhammad Ahmed', course: 'Graphic Designing', date: '18 January 2025' },
+    'CNCA-2025-004': { name: 'Ayesha Ali', course: 'Digital Marketing', date: '22 January 2025' },
+    'CNCA-2025-005': { name: 'Hassan Raza', course: 'C++ Programming', date: '25 January 2025' },
+  };
+
+  // ═══════════════════════════════════════════════════════════════════
+
+  function verifyCertificate() {
+    const certId = document.getElementById('certId').value.trim().toUpperCase();
+    const statusBox = document.getElementById('statusBox');
+    const certDisplay = document.getElementById('certDisplay');
+
+    // Reset status
+    statusBox.classList.remove('show');
+
+    if (!certId) {
+      showStatus('⚠️ Please enter a certificate ID', 'error');
+      certDisplay.classList.remove('show');
+      return;
+    }
+
+    if (certificates[certId]) {
+      const cert = certificates[certId];
+      
+      // Populate certificate
+      document.getElementById('displayName').textContent = cert.name;
+      document.getElementById('displayCourse').textContent = cert.course;
+      document.getElementById('displayDate').textContent = cert.date;
+      document.getElementById('displayId').textContent = certId;
+
+      // Show certificate
+      certDisplay.classList.add('show');
+      showStatus('✅ Certificate verified successfully!', 'success');
+      
+      // Scroll to certificate
+      setTimeout(() => {
+        document.getElementById('certificateContent').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } else {
+      showStatus('❌ Certificate ID not found. Please check and try again.', 'error');
+      certDisplay.classList.remove('show');
+    }
+  }
+
+  function showStatus(message, type) {
+    const statusBox = document.getElementById('statusBox');
+    statusBox.textContent = message;
+    statusBox.className = `status-box show status-${type}`;
+  }
+
+  function resetVerification() {
+    document.getElementById('certId').value = '';
+    document.getElementById('certDisplay').classList.remove('show');
+    document.getElementById('statusBox').classList.remove('show');
+    document.getElementById('certId').focus();
+  }
+
+  function printCertificate() {
+    const printWindow = window.open('', '_blank');
+    const cert = document.getElementById('certificateContent').outerHTML;
+ 
+    printWindow.document.close();
+    setTimeout(() => printWindow.print(), 250);
+  }
+
+  // Check if QR code hash parameter exists
+  document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const qrHash = params.get('verify');
+    
+    if (qrHash) {
+      document.getElementById('certId').value = qrHash;
+      verifyCertificate();
+    }
+  });
+
+  // Allow Enter key to verify
+  document.getElementById('certId').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') verifyCertificate();
+  });
+</script>
+
+</body>
+</html>
